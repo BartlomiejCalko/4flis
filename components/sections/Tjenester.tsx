@@ -24,13 +24,13 @@ const TjenesterSection: React.FC = () => {
     <section
       id="tjenester"
       aria-labelledby="tjenester-heading"
-      className="relative flex flex-col z-10 mx-auto w-full max-w-7xl h-[calc(100vh-4rem)] px-4 py-16 sm:px-6 lg:px-8 items-center justify-center bg-gradient-to-br from-white to-gray-200 backdrop-blur-xl p-6 rounded-xl"
+      className="relative flex flex-col z-10 mx-auto w-full max-w-7xl h-[calc(100vh-4rem)] px-4 py-16 sm:px-6 lg:px-8 items-center justify-center p-6 rounded-xl"
     >
       <div className="mx-auto max-w-2xl text-center">
-        <h2 id="tjenester-heading" className="text-3xl font-bold tracking-tight text-slate-900">
+        <h2 id="tjenester-heading" className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100">
           Tjenester
         </h2>
-        <p className="mt-3 text-sm text-slate-700 md:text-base">
+        <p className="mt-3 text-sm text-stone-700 dark:text-stone-200 md:text-base">
           Vi leverer kvalitet i alle ledd – fra planlegging til ferdig resultat.
         </p>
       </div>

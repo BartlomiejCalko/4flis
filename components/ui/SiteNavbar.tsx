@@ -2,16 +2,18 @@
 import React, { useState } from "react";
 import { Menu, MenuItem, HoveredLink, ProductItem } from "@/components/ui/navbar-menu";
 import { cn } from "@/lib/utils";
-import { Menu as MenuIcon, X as CloseIcon } from "lucide-react";
+import { Menu as MenuIcon, X as CloseIcon, Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import { Bodoni_Moda } from "next/font/google";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 
 const bodoni = Bodoni_Moda({ subsets: ["latin"], weight: ["900"] });
 
 export const SiteNavbar = ({ className }: { className?: string }) => {
 	const [active, setActive] = useState<string | null>(null);
 	const [isMobileOpen, setIsMobileOpen] = useState(false);
+	const { theme, setTheme } = useTheme();
 
 	const handleToggleMobile = () => {
 		setIsMobileOpen((prev) => !prev);
@@ -21,9 +23,13 @@ export const SiteNavbar = ({ className }: { className?: string }) => {
 		setIsMobileOpen(false);
 	};
 
+	const handleToggleTheme = () => {
+		setTheme(theme === "dark" ? "light" : "dark");
+	};
+
 	return (
 		<header className={cn("fixed inset-x-0 top-0 z-50", className)}>
-			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-2">
                 <div className="flex h-16 items-center justify-between">
                     
                     
@@ -35,14 +41,14 @@ export const SiteNavbar = ({ className }: { className?: string }) => {
 						)}
 						aria-label="Hjem"
 					>
-                            <div className="flex flex-col items-center ">
-                            <Image src="/logo_flis.png" alt="4FLIS" width={60} height={60} />
-                            <p className="mt-[-8px] font-{bodoni.className}">4FLIS</p>
-                            </div>
+							<div className="flex flex-col items-center ">
+							<Image src="/logo_flis.png" alt="4FLIS" width={60} height={60} />
+							<p className="mt-[-4px] font-{bodoni.className}">4FLIS</p>
+							</div>
 					</Link>
                     
 					{/* Desktop nav */}
-					<div className="hidden md:block">
+					<div className="hidden md:flex items-center gap-4">
 						<Menu setActive={setActive}>
 							<MenuItem setActive={setActive} active={active} item="Om oss">
 								<div className="flex flex-col space-y-4 text-sm">
@@ -92,6 +98,17 @@ export const SiteNavbar = ({ className }: { className?: string }) => {
 								</div>
 							</MenuItem>
 						</Menu>
+						<button
+							aria-label="Toggle theme"
+							onClick={handleToggleTheme}
+							onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") handleToggleTheme(); }}
+							tabIndex={0}
+							className="inline-flex items-center justify-center rounded-md p-2 text-foreground hover:bg-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+						>
+							<Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" aria-hidden />
+							<Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" aria-hidden />
+							<span className="sr-only">Toggle theme</span>
+						</button>
 					</div>
 
 					{/* Mobile toggle */}

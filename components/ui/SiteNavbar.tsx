@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Menu as MenuIcon, X as CloseIcon } from "lucide-react";
 import Link from "next/link";
 import { Bodoni_Moda } from "next/font/google";
+import Image from "next/image";
 
 const bodoni = Bodoni_Moda({ subsets: ["latin"], weight: ["900"] });
 
@@ -22,8 +23,10 @@ export const SiteNavbar = ({ className }: { className?: string }) => {
 
 	return (
 		<header className={cn("fixed inset-x-0 top-0 z-50", className)}>
-			<div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-				<div className="flex h-16 items-center justify-between">
+			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div className="flex h-16 items-center justify-between">
+                    
+                    
 					<Link
 						href="/"
 						className={cn(
@@ -32,9 +35,12 @@ export const SiteNavbar = ({ className }: { className?: string }) => {
 						)}
 						aria-label="Hjem"
 					>
-						4FLIS
+                            <div className="flex flex-col items-center ">
+                            <Image src="/logo_flis.png" alt="4FLIS" width={60} height={60} />
+                            <p className="mt-[-8px] font-{bodoni.className}">4FLIS</p>
+                            </div>
 					</Link>
-
+                    
 					{/* Desktop nav */}
 					<div className="hidden md:block">
 						<Menu setActive={setActive}>

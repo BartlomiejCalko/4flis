@@ -30,12 +30,12 @@ const HomeHero: React.FC = () => {
         ))}
       </BentoGrid>
 
-      <ContainerScale className="relative z-10 text-center">
+      <ContainerScale className="relative z-10 text-center bg-gradient-to-br from-white to-gray-100 backdrop-blur-xl p-6 rounded-xl">
         <h1 className="max-w-xl text-5xl font-bold tracking-tighter text-slate-800 ">
-          Din animerte hero
+          Sammen med de beste - for å skape det beste
         </h1>
         <p className="my-6 max-w-xl text-sm text-slate-700 md:text-base">
-          En hero-seksjon med scroll-animasjoner og levende galleri.
+        Skreddersydd flislegging for hjem og næring – detaljene som gjør forskjellen.
         </p>
         <div className="flex items-center justify-center gap-4">
           <Button className="bg-indigo-500 px-4 py-2 font-medium hover:bg-indigo-400">

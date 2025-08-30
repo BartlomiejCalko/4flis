@@ -14,8 +14,8 @@ const IMAGES = [
 
 const HomeHero: React.FC = () => {
   return (
-    <ContainerScroll className="h-[350vh]">
-      <BentoGrid className="sticky left-0 top-0 z-0 h-screen w-full p-4">
+    <ContainerScroll className="h-[350vh] z-40">
+      <BentoGrid className="sticky left-0 top-16 z-0 h-[calc(100vh-4rem)] w-full p-4">
         {IMAGES.map((imageUrl, index) => (
           <BentoCell key={index} className="relative overflow-hidden rounded-xl shadow-xl">
             <Image

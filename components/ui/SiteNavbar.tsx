@@ -6,7 +6,7 @@ import { Menu as MenuIcon, X as CloseIcon } from "lucide-react";
 import Link from "next/link";
 import { Bodoni_Moda } from "next/font/google";
 
-const bodoni = Bodoni_Moda({ subsets: ["latin"], weight: ["700"] });
+const bodoni = Bodoni_Moda({ subsets: ["latin"], weight: ["900"] });
 
 export const SiteNavbar = ({ className }: { className?: string }) => {
 	const [active, setActive] = useState<string | null>(null);
@@ -47,34 +47,32 @@ export const SiteNavbar = ({ className }: { className?: string }) => {
 							</MenuItem>
 							<MenuItem setActive={setActive} active={active} item="Tjenester">
 								<div className="flex flex-col space-y-4 text-sm">
-									<HoveredLink href="/tjenester">Webutvikling</HoveredLink>
-									<HoveredLink href="/tjenester">Design</HoveredLink>
-									<HoveredLink href="/tjenester">SEO</HoveredLink>
-									<HoveredLink href="/tjenester">Branding</HoveredLink>
+									<HoveredLink href="/tjenester">Flislegging</HoveredLink>
+									<HoveredLink href="/tjenester">Betonglegging</HoveredLink>
 								</div>
 							</MenuItem>
 							<MenuItem setActive={setActive} active={active} item="Prosjekter">
 								<div className="text-sm grid grid-cols-2 gap-6 p-2">
 									<ProductItem
-										title="Algochurn"
+										title="Bad"
 										href="https://algochurn.com"
 										src="https://assets.aceternity.com/demos/algochurn.webp"
 										description="Prepare for tech interviews like never before."
 									/>
 									<ProductItem
-										title="Tailwind Master Kit"
+										title="Hall"
 										href="https://tailwindmasterkit.com"
 										src="https://assets.aceternity.com/demos/tailwindmasterkit.webp"
 										description="Production ready Tailwind css components for your next project"
 									/>
 									<ProductItem
-										title="Moonbeam"
+										title="Kjøkken"
 										href="https://gomoonbeam.com"
 										src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.51.31%E2%80%AFPM.png"
 										description="Never write from scratch again. Go from idea to blog in minutes."
 									/>
 									<ProductItem
-										title="Rogue"
+										title="Gulv"
 										href="https://userogue.com"
 										src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.47.07%E2%80%AFPM.png"
 										description="Respond to government RFPs, RFIs and RFQs 10x faster using AI"

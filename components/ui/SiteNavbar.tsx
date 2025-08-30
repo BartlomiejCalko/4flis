@@ -1,0 +1,144 @@
+"use client";
+import React, { useState } from "react";
+import { Menu, MenuItem, HoveredLink, ProductItem } from "@/components/ui/navbar-menu";
+import { cn } from "@/lib/utils";
+import { Menu as MenuIcon, X as CloseIcon } from "lucide-react";
+import Link from "next/link";
+import { Bodoni_Moda } from "next/font/google";
+
+const bodoni = Bodoni_Moda({ subsets: ["latin"], weight: ["700"] });
+
+export const SiteNavbar = ({ className }: { className?: string }) => {
+	const [active, setActive] = useState<string | null>(null);
+	const [isMobileOpen, setIsMobileOpen] = useState(false);
+
+	const handleToggleMobile = () => {
+		setIsMobileOpen((prev) => !prev);
+	};
+
+	const handleCloseMobile = () => {
+		setIsMobileOpen(false);
+	};
+
+	return (
+		<header className={cn("fixed inset-x-0 top-0 z-50", className)}>
+			<div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+				<div className="flex h-16 items-center justify-between">
+					<Link
+						href="/"
+						className={cn(
+							"text-lg font-extrabold tracking-tight text-black dark:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md px-2",
+							bodoni.className
+						)}
+						aria-label="Hjem"
+					>
+						4FLIS
+					</Link>
+
+					{/* Desktop nav */}
+					<div className="hidden md:block">
+						<Menu setActive={setActive}>
+							<MenuItem setActive={setActive} active={active} item="Om oss">
+								<div className="flex flex-col space-y-4 text-sm">
+									<HoveredLink href="/om-oss">Vår historie</HoveredLink>
+									<HoveredLink href="/om-oss">Team</HoveredLink>
+									<HoveredLink href="/om-oss">Verdier</HoveredLink>
+								</div>
+							</MenuItem>
+							<MenuItem setActive={setActive} active={active} item="Tjenester">
+								<div className="flex flex-col space-y-4 text-sm">
+									<HoveredLink href="/tjenester">Webutvikling</HoveredLink>
+									<HoveredLink href="/tjenester">Design</HoveredLink>
+									<HoveredLink href="/tjenester">SEO</HoveredLink>
+									<HoveredLink href="/tjenester">Branding</HoveredLink>
+								</div>
+							</MenuItem>
+							<MenuItem setActive={setActive} active={active} item="Prosjekter">
+								<div className="text-sm grid grid-cols-2 gap-6 p-2">
+									<ProductItem
+										title="Algochurn"
+										href="https://algochurn.com"
+										src="https://assets.aceternity.com/demos/algochurn.webp"
+										description="Prepare for tech interviews like never before."
+									/>
+									<ProductItem
+										title="Tailwind Master Kit"
+										href="https://tailwindmasterkit.com"
+										src="https://assets.aceternity.com/demos/tailwindmasterkit.webp"
+										description="Production ready Tailwind css components for your next project"
+									/>
+									<ProductItem
+										title="Moonbeam"
+										href="https://gomoonbeam.com"
+										src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.51.31%E2%80%AFPM.png"
+										description="Never write from scratch again. Go from idea to blog in minutes."
+									/>
+									<ProductItem
+										title="Rogue"
+										href="https://userogue.com"
+										src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.47.07%E2%80%AFPM.png"
+										description="Respond to government RFPs, RFIs and RFQs 10x faster using AI"
+									/>
+								</div>
+							</MenuItem>
+							<MenuItem setActive={setActive} active={active} item="Kontakt">
+								<div className="flex flex-col space-y-4 text-sm">
+									<HoveredLink href="/kontakt">Kontakt oss</HoveredLink>
+									<HoveredLink href="/kontakt">Forespørsel</HoveredLink>
+								</div>
+							</MenuItem>
+						</Menu>
+					</div>
+
+					{/* Mobile toggle */}
+					<button
+						tabIndex={0}
+						aria-expanded={isMobileOpen}
+						aria-controls="mobile-menu"
+						aria-label={isMobileOpen ? "Lukk meny" : "Åpne meny"}
+						className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-foreground hover:bg-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+						onClick={handleToggleMobile}
+						onKeyDown={(e) => {
+							if (e.key === "Enter" || e.key === " ") handleToggleMobile();
+						}}
+					>
+						{isMobileOpen ? <CloseIcon className="h-6 w-6" aria-hidden /> : <MenuIcon className="h-6 w-6" aria-hidden />}
+					</button>
+				</div>
+			</div>
+
+			{/* Mobile menu Drawer */}
+			<div
+				id="mobile-menu"
+				className={cn(
+					"md:hidden fixed inset-x-0 top-16 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/75 transition-all duration-200 ease-out",
+					isMobileOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-2 pointer-events-none"
+				)}
+				aria-hidden={!isMobileOpen}
+				role="dialog"
+			>
+				<nav className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-4">
+					<ul className="flex flex-col gap-2">
+						<li>
+							<HoveredLink href="/" onClick={handleCloseMobile} className="block rounded-md px-3 py-2 text-base font-medium hover:bg-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-ring">Hjem</HoveredLink>
+						</li>
+						<li>
+							<HoveredLink href="/om-oss" onClick={handleCloseMobile} className="block rounded-md px-3 py-2 text-base font-medium hover:bg-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-ring">Om oss</HoveredLink>
+						</li>
+						<li>
+							<HoveredLink href="/tjenester" onClick={handleCloseMobile} className="block rounded-md px-3 py-2 text-base font-medium hover:bg-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-ring">Tjenester</HoveredLink>
+						</li>
+						<li>
+							<HoveredLink href="/prosjekter" onClick={handleCloseMobile} className="block rounded-md px-3 py-2 text-base font-medium hover:bg-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-ring">Prosjekter</HoveredLink>
+						</li>
+						<li>
+							<HoveredLink href="/kontakt" onClick={handleCloseMobile} className="block rounded-md px-3 py-2 text-base font-medium hover:bg-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-ring">Kontakt</HoveredLink>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+	);
+};
+
+export default SiteNavbar; 

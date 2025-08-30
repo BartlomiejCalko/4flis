@@ -11,12 +11,11 @@ interface FlipLinkProps {
 
 const FlipLink: React.FC<FlipLinkProps> = ({ children, href }) => {
   return (
-    <motion.a
+    <motion.span
       initial="initial"
       whileHover="hovered"
-      target="_blank"
-      href={href}
-      className="relative block overflow-hidden whitespace-nowrap text-4xl font-semibold uppercase dark:text-white/90 sm:text-7xl md:text-9xl "
+      
+      className="relative block overflow-hidden whitespace-nowrap text-4xl font-semibold uppercase dark:text-white/90 sm:text-7xl md:text-8xl "
       style={{
         lineHeight: 0.75,
       }}
@@ -67,7 +66,7 @@ const FlipLink: React.FC<FlipLinkProps> = ({ children, href }) => {
           </motion.span>
         ))}
       </div>
-    </motion.a>
+    </motion.span>
   )
 }
 

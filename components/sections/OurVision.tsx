@@ -6,10 +6,10 @@ import FlipLink from "@/components/ui/text-effect-flipper";
 const OurVisionSection: React.FC = () => {
   return (
     <section
-      className="relative flex flex-row h-[calc(100vh-4rem)] w-full items-center justify-center bg-gradient-to-br from-purple-200 to-blue-300 dark:from-stone-900 dark:to-stone-950 backdrop-blur-md p-6 rounded-xl"
+      className="relative flex flex-row h-[calc(100vh-4rem)] w-full items-center justify-center p-4"
       aria-label="Our vision section"
     >
-      <div className="flex flex-col items-center justify-center gap-6 px-4 text-center">
+      <div className="flex flex-col items-center justify-center gap-6 px-4 text-center bg-gradient-to-br from-purple-400/50 to-blue-500/20 dark:from-purple-500/5 dark:to-blue-500/3 w-full h-full rounded-xl">
         <div className="flex flex-row items-center justify-center gap-6">
         <FlipLink href="/om-oss">Sammen</FlipLink>
         <FlipLink href="/om-oss">med</FlipLink>

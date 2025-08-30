@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { BentoCell, BentoGrid, ContainerScale, ContainerScroll } from "@/components/blocks/hero-gallery-scroll-animation";
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import Image from "next/image";
 
 const IMAGES = [
@@ -52,20 +52,28 @@ const HomeHero: React.FC = () => {
           ))}
         </BentoGrid>
 
-        <ContainerScale className="relative z-10 text-center p-6 rounded-xl">
+        <ContainerScale className="relative z-10 text-center p-6 rounded-xl mt-6">
           <h1 className="max-w-xl text-5xl font-bold tracking-tighter text-slate-800 dark:text-white">
             Flis som varer. Håndverk som skiller seg ut.
           </h1>
-          <p className="my-6 max-w-xl text-sm text-slate-700 dark:text-stone-300 md:text-base">
+          <p className="my-4 max-w-xl text-sm text-slate-700 dark:text-stone-300 md:text-base">
             Skreddersydd flislegging for hjem og næring – detaljene som gjør forskjellen.
           </p>
           <div className="flex items-center justify-center gap-4">
-            <Button className="bg-indigo-500 px-4 py-2 font-medium hover:bg-indigo-400">
-              Kom i gang
-            </Button>
-            <Button variant="link" className="bg-transparent px-4 py-2 font-medium">
-              Lær mer
-            </Button>
+            <Link
+              href="/kontakt"
+              aria-label="Kontakt oss"
+              className="inline-flex items-center justify-center rounded-md bg-indigo-500 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+            >
+              Kontakt oss
+            </Link>
+            <Link
+              href="/prosjekter"
+              aria-label="Se våre prosjekter"
+              className="inline-flex items-center justify-center bg-transparent px-4 py-2 text-sm font-medium underline-offset-4 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+            >
+              Se våre prosjekter
+            </Link>
           </div>
         </ContainerScale>
       </ContainerScroll>

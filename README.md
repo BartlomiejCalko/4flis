@@ -34,3 +34,25 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Kontakt – konfiguracja wysyłki e-mail
+
+Aby formularz kontaktowy mógł wysyłać e‑maile przez Resend:
+
+1. Skopiuj plik `.env.example` do `.env.local` i uzupełnij wartości:
+   - `RESEND_API_KEY` – klucz API z Resend
+   - `MAIL_FROM` – adres nadawcy (np. `4FLIS Kontakt <onboarding@resend.dev>`) 
+   - `MAIL_TO` – adres odbiorcy (np. Twój e‑mail firmowy)
+2. Zainstaluj zależność:
+
+```bash
+npm install resend
+```
+
+3. Uruchom aplikację:
+
+```bash
+npm run dev
+```
+
+Formularz wysyła POST na `/api/contact` i zwraca komunikaty o powodzeniu/błędzie.

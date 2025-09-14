@@ -37,7 +37,7 @@ const SiteFooter: React.FC = () => {
             <h3 className="text-sm font-semibold text-slate-900">Kontakt</h3>
             <ul className="mt-3 space-y-2 text-sm text-slate-700">
               <li>E-post: <a href="mailto:post@4flis.no" className="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">post@4flis.no</a></li>
-              <li>Telefon: <a href="tel:+4700000000" className="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">+47 00 00 00 00</a></li>
+              <li>Telefon: <a href="tel:+47 417 41 102" className="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">+47 417 41 102</a></li>
             </ul>
           </div>
         </div>

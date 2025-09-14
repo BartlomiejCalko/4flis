@@ -31,10 +31,10 @@ const FeaturedProjectsSection: React.FC = () => {
       className="relative z-10 mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8"
     >
       <div className="mx-auto max-w-2xl text-center">
-        <h2 id="featured-projects-heading" className="text-3xl font-bold tracking-tight text-slate-900">
+        <h2 id="featured-projects-heading" className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100">
           Utvalgte prosjekter
         </h2>
-        <p className="mt-3 text-sm text-slate-700 md:text-base">
+        <p className="mt-3 text-sm text-stone-700 dark:text-stone-200 md:text-base">
           Et utvalg av arbeid vi er stolte av.
         </p>
       </div>

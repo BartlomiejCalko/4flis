@@ -50,20 +50,20 @@ export const SiteNavbar = ({ className }: { className?: string }) => {
 					{/* Desktop nav */}
 					<div className="hidden md:flex items-center gap-4">
 						<Menu setActive={setActive}>
-							<MenuItem setActive={setActive} active={active} item="Om oss">
+							<MenuItem setActive={setActive} active={active} item="Om oss" href="/om-oss">
 								<div className="flex flex-col space-y-4 text-sm">
 									<HoveredLink href="/om-oss">Vår historie</HoveredLink>
 									<HoveredLink href="/om-oss">Team</HoveredLink>
 									<HoveredLink href="/om-oss">Verdier</HoveredLink>
 								</div>
 							</MenuItem>
-							<MenuItem setActive={setActive} active={active} item="Tjenester">
+							<MenuItem setActive={setActive} active={active} item="Tjenester" href="/tjenester">
 								<div className="flex flex-col space-y-4 text-sm">
 									<HoveredLink href="/tjenester">Flislegging</HoveredLink>
 									<HoveredLink href="/tjenester">Betonglegging</HoveredLink>
 								</div>
 							</MenuItem>
-							<MenuItem setActive={setActive} active={active} item="Prosjekter">
+							<MenuItem setActive={setActive} active={active} item="Prosjekter" href="/prosjekter">
 								<div className="text-sm grid grid-cols-2 gap-6 p-2">
 									<ProductItem
 										title="Bad"
@@ -91,7 +91,7 @@ export const SiteNavbar = ({ className }: { className?: string }) => {
 									/>
 								</div>
 							</MenuItem>
-							<MenuItem setActive={setActive} active={active} item="Kontakt">
+							<MenuItem setActive={setActive} active={active} item="Kontakt" href="/kontakt">
 								<div className="flex flex-col space-y-4 text-sm">
 									<HoveredLink href="/kontakt">Kontakt oss</HoveredLink>
 									<HoveredLink href="/kontakt">Forespørsel</HoveredLink>

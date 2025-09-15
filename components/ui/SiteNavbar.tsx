@@ -50,12 +50,8 @@ export const SiteNavbar = ({ className }: { className?: string }) => {
 					{/* Desktop nav */}
 					<div className="hidden md:flex items-center gap-4">
 						<Menu setActive={setActive}>
-							<MenuItem setActive={setActive} active={active} item="Om oss" href="/om-oss">
-								<div className="flex flex-col space-y-4 text-sm">
-									<HoveredLink href="/om-oss">Vår historie</HoveredLink>
-									<HoveredLink href="/om-oss">Team</HoveredLink>
-									<HoveredLink href="/om-oss">Verdier</HoveredLink>
-								</div>
+							<MenuItem setActive={setActive} item="Om oss" href="/om-oss">
+								
 							</MenuItem>
 							<MenuItem setActive={setActive} active={active} item="Tjenester" href="/tjenester">
 								<div className="flex flex-col space-y-4 text-sm">
@@ -67,35 +63,32 @@ export const SiteNavbar = ({ className }: { className?: string }) => {
 								<div className="text-sm grid grid-cols-2 gap-6 p-2">
 									<ProductItem
 										title="Bad"
-										href="https://algochurn.com"
+										href="/prosjekter"
 										src="https://assets.aceternity.com/demos/algochurn.webp"
-										description="Prepare for tech interviews like never before."
+										description="Prosjekter med badlegging"
 									/>
 									<ProductItem
 										title="Hall"
-										href="https://tailwindmasterkit.com"
+										href="/prosjekter"
 										src="https://assets.aceternity.com/demos/tailwindmasterkit.webp"
-										description="Production ready Tailwind css components for your next project"
+										description="Prosjekter med halllegging"
 									/>
 									<ProductItem
 										title="Kjøkken"
-										href="https://gomoonbeam.com"
+										href="/prosjekter"
 										src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.51.31%E2%80%AFPM.png"
-										description="Never write from scratch again. Go from idea to blog in minutes."
+										description="Prosjekter med kjøkkenlegging"
 									/>
 									<ProductItem
 										title="Gulv"
-										href="https://userogue.com"
+										href="/prosjekter"
 										src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.47.07%E2%80%AFPM.png"
-										description="Respond to government RFPs, RFIs and RFQs 10x faster using AI"
+										description="Prosjekter med gulvlegging"
 									/>
 								</div>
 							</MenuItem>
-							<MenuItem setActive={setActive} active={active} item="Kontakt" href="/kontakt">
-								<div className="flex flex-col space-y-4 text-sm">
-									<HoveredLink href="/kontakt">Kontakt oss</HoveredLink>
-									<HoveredLink href="/kontakt">Forespørsel</HoveredLink>
-								</div>
+							<MenuItem setActive={setActive} item="Kontakt" href="/kontakt">
+								
 							</MenuItem>
 						</Menu>
 						<button

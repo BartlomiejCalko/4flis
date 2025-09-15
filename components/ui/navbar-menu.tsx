@@ -23,7 +23,7 @@ export const MenuItem = ({
   href,
 }: {
   setActive: (item: string) => void;
-  active: string | null;
+  active?: string | null;
   item: string;
   children?: React.ReactNode;
   href?: string;

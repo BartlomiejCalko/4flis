@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import SiteNavbar from "@/components/ui/SiteNavbar";
 import { FlickeringGrid } from "@/components/ui/flickering-grid";
-import SiteFooter from "@/components/ui/SiteFooter";
 import LenisProvider from "@/components/providers/LenisProvider";
 import { ThemeProvider } from "@/components/theme-provider";
+import RootShell from "@/components/RootShell";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,19 +33,9 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <LenisProvider>
-            <SiteNavbar />
-            {/* <div className="fixed inset-0 z-0 pointer-events-none">
-          <FlickeringGrid
-            className="w-full h-full"
-            squareSize={4}
-            gridGap={6}
-            color="#6B7280"
-            maxOpacity={0.5}
-            flickerChance={0.1}
-          />
-        </div> */}
-            <div className="relative z-10 pt-16">{children}</div>
-            <SiteFooter />
+            <RootShell>
+              {children}
+            </RootShell>
           </LenisProvider>
         </ThemeProvider>
       </body>

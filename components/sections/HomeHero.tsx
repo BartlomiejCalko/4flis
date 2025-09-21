@@ -56,8 +56,8 @@ const HomeHero: React.FC = () => {
         <ContainerScale className="relative z-10 text-center p-6 rounded-xl mt-6">
           
           <div className="flex flex-col items-center mb-4">
-							<Image src="/logo_flis.png" alt="4FLIS" width={500} height={60} />
-							<p className="mt-[-4px] font-{bodoni.className} text-8xl">4FLIS</p>
+							<Image src="/logo_flis.png" alt="4FLIS" width={380} height={60} />
+							<p className="mt-[-18px] font-{bodoni.className} text-8xl">4FLIS</p>
           </div>
           {/* <h1 className="max-w-xl text-1xl font-bold tracking-tighter text-slate-800 dark:text-white">
             Flis som varer. Håndverk som skiller seg ut.

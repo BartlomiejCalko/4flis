@@ -3,6 +3,7 @@ import React from "react";
 import { BentoCell, BentoGrid, ContainerScale, ContainerScroll } from "@/components/blocks/hero-gallery-scroll-animation";
 import Link from "next/link";
 import Image from "next/image";
+import { Bodoni_Moda } from "next/font/google";
 
 const IMAGES = [
   "/bad1.jpg",
@@ -55,16 +56,16 @@ const HomeHero: React.FC = () => {
         <ContainerScale className="relative z-10 text-center p-6 rounded-xl mt-6">
           
           <div className="flex flex-col items-center mb-4">
-							<Image src="/logo_flis.png" alt="4FLIS" width={200} height={60} />
-							<p className="mt-[-4px] font-{bodoni.className} text-4xl">4FLIS</p>
+							<Image src="/logo_flis.png" alt="4FLIS" width={500} height={60} />
+							<p className="mt-[-4px] font-{bodoni.className} text-8xl">4FLIS</p>
           </div>
-          <h1 className="max-w-xl text-1xl font-bold tracking-tighter text-slate-800 dark:text-white">
+          {/* <h1 className="max-w-xl text-1xl font-bold tracking-tighter text-slate-800 dark:text-white">
             Flis som varer. Håndverk som skiller seg ut.
-          </h1>
+          </h1> */}
           {/* <p className="my-4 max-w-xl text-sm text-slate-700 dark:text-stone-300 md:text-base">
             Skreddersydd flislegging for hjem og næring – detaljene som gjør forskjellen.
           </p> */}
-          <div className="flex items-center justify-center gap-4 mt-4">
+          {/* <div className="flex items-center justify-center gap-4 mt-4">
             <Link
               href="/kontakt"
               aria-label="Kontakt oss"
@@ -79,7 +80,7 @@ const HomeHero: React.FC = () => {
             >
               Se våre prosjekter
             </Link>
-          </div>
+          </div> */}
         </ContainerScale>
       </ContainerScroll>
     </>

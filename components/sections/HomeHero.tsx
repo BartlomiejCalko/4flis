@@ -53,13 +53,18 @@ const HomeHero: React.FC = () => {
         </BentoGrid>
 
         <ContainerScale className="relative z-10 text-center p-6 rounded-xl mt-6">
-          <h1 className="max-w-xl text-5xl font-bold tracking-tighter text-slate-800 dark:text-white">
+          
+          <div className="flex flex-col items-center mb-4">
+							<Image src="/logo_flis.png" alt="4FLIS" width={200} height={60} />
+							<p className="mt-[-4px] font-{bodoni.className} text-4xl">4FLIS</p>
+          </div>
+          <h1 className="max-w-xl text-1xl font-bold tracking-tighter text-slate-800 dark:text-white">
             Flis som varer. Håndverk som skiller seg ut.
           </h1>
-          <p className="my-4 max-w-xl text-sm text-slate-700 dark:text-stone-300 md:text-base">
+          {/* <p className="my-4 max-w-xl text-sm text-slate-700 dark:text-stone-300 md:text-base">
             Skreddersydd flislegging for hjem og næring – detaljene som gjør forskjellen.
-          </p>
-          <div className="flex items-center justify-center gap-4">
+          </p> */}
+          <div className="flex items-center justify-center gap-4 mt-4">
             <Link
               href="/kontakt"
               aria-label="Kontakt oss"

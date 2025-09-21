@@ -50,6 +50,9 @@ export const SiteNavbar = ({ className }: { className?: string }) => {
 					{/* Desktop nav */}
 					<div className="hidden md:flex items-center gap-4">
 						<Menu setActive={setActive}>
+							<MenuItem setActive={setActive} item="Hjem" href="/">
+								
+							</MenuItem>
 							<MenuItem setActive={setActive} item="Om oss" href="/om-oss">
 								
 							</MenuItem>

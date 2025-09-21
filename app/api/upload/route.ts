@@ -4,6 +4,14 @@ import { randomUUID } from "crypto";
 
 export const runtime = "nodejs";
 
+const getErrorMessage = (unknownError: unknown): string => {
+	if (unknownError && typeof unknownError === "object" && "message" in unknownError) {
+		const maybeMessage = (unknownError as { message?: unknown }).message;
+		if (typeof maybeMessage === "string") return maybeMessage;
+	}
+	return "Unexpected error";
+};
+
 export async function POST(req: Request) {
 	const user = await getCurrentUser();
 	if (!user) return Response.json({ success: false, message: "Unauthorized" }, { status: 401 });
@@ -40,7 +48,7 @@ export async function POST(req: Request) {
 		return Response.json({ success: true, files: uploads.filter(Boolean) });
 	} catch (error: unknown) {
 		console.error("upload error", error);
-		const message = error && typeof error === "object" && "message" in error ? String((error as any).message) : "Upload failed";
+		const message = getErrorMessage(error);
 		return Response.json({ success: false, message }, { status: 500 });
 	}
 }
@@ -55,7 +63,7 @@ export async function DELETE(req: Request) {
 		return Response.json({ success: true });
 	} catch (error: unknown) {
 		console.error("delete upload error", error);
-		const message = error && typeof error === "object" && "message" in error ? String((error as any).message) : "Delete failed";
+		const message = getErrorMessage(error);
 		return Response.json({ success: false, message }, { status: 500 });
 	}
 } 

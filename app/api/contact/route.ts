@@ -49,7 +49,7 @@ export const POST = async (request: Request) => {
 		});
 
 		return Response.json({ success: true });
-	} catch (error) {
+	} catch {
 		return Response.json({ error: "Failed to send message" }, { status: 500 });
 	}
 }; 

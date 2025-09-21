@@ -20,6 +20,16 @@ import {
   HelpCircle,
   User,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+type OptionProps = {
+  Icon: LucideIcon;
+  title: string;
+  selected: string;
+  setSelected: React.Dispatch<React.SetStateAction<string>>;
+  open: boolean;
+  notifs?: number;
+};
 
 export const Example = () => {
   const [isDark, setIsDark] = useState(false);
@@ -135,7 +145,7 @@ const Sidebar = () => {
   );
 };
 
-const Option = ({ Icon, title, selected, setSelected, open, notifs }) => {
+const Option: React.FC<OptionProps> = ({ Icon, title, selected, setSelected, open, notifs }) => {
   const isSelected = selected === title;
   
   return (
@@ -170,7 +180,8 @@ const Option = ({ Icon, title, selected, setSelected, open, notifs }) => {
   );
 };
 
-const TitleSection = ({ open }) => {
+type TitleSectionProps = { open: boolean };
+const TitleSection: React.FC<TitleSectionProps> = ({ open }) => {
   return (
     <div className="mb-6 border-b border-gray-200 dark:border-gray-800 pb-4">
       <div className="flex cursor-pointer items-center justify-between rounded-md p-2 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800">
@@ -221,7 +232,8 @@ const Logo = () => {
   );
 };
 
-const ToggleClose = ({ open, setOpen }) => {
+type ToggleCloseProps = { open: boolean; setOpen: React.Dispatch<React.SetStateAction<boolean>> };
+const ToggleClose: React.FC<ToggleCloseProps> = ({ open, setOpen }) => {
   return (
     <button
       onClick={() => setOpen(!open)}
@@ -249,7 +261,8 @@ const ToggleClose = ({ open, setOpen }) => {
   );
 };
 
-const ExampleContent = ({ isDark, setIsDark }) => {
+type ExampleContentProps = { isDark: boolean; setIsDark: React.Dispatch<React.SetStateAction<boolean>> };
+const ExampleContent: React.FC<ExampleContentProps> = ({ isDark, setIsDark }) => {
   return (
     <div className="flex-1 bg-gray-50 dark:bg-gray-950 p-6 overflow-auto">
       {/* Header */}

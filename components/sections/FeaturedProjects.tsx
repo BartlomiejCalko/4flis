@@ -12,10 +12,12 @@ type Project = {
 };
 
 const PROJECTS: Project[] = [
-  { title: "Lyst bad", imageUrl: "/bad1.jpg", href: "/prosjekter" },
-  { title: "Mørke fliser", imageUrl: "/bad2.jpg", href: "/prosjekter" },
+  { title: "Lyst bad", imageUrl: "/bad2.jpg", href: "/prosjekter" },
+  { title: "Mørke fliser", imageUrl: "/bad1.jpg", href: "/prosjekter" },
   { title: "Moderne dusj", imageUrl: "/bad3.jpg", href: "/prosjekter" },
   { title: "Detaljert arbeid", imageUrl: "/bad4.jpg", href: "/prosjekter" },
+  { title: "Moderne dusj", imageUrl: "/bad-dali.webp", href: "/prosjekter" },
+  { title: "Detaljert arbeid", imageUrl: "/bad-dali-2.webp", href: "/prosjekter" },
 ];
 
 const FeaturedProjectsSection: React.FC = () => {

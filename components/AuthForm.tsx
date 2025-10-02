@@ -67,16 +67,21 @@ const AuthForm = ({ type }: { type: FormType }) => {
         const idToken = await userCredentials.user.getIdToken();
 
         if (!idToken) {
-          toast.error("Sign in failed");
+          toast.error("Logowanie nie powiodło się");
           return;
         }
 
-        await signIn({
+        const result = await signIn({
           email,
           idToken
         });
 
-        toast.success("Signed in successfully");
+        if (!result?.success) {
+          toast.error(result?.message || "Błąd logowania");
+          return;
+        }
+
+        toast.success("Zalogowano pomyślnie");
         router.push("/dashboard");
       }
     } catch (error) {
@@ -132,15 +137,17 @@ const AuthForm = ({ type }: { type: FormType }) => {
             </Button>
           </form>
         </Form>
-        <p className="text-center">
-          {isSignIn ? "Don't have an account?" : "Already have an account?"}
-          <Link
-            href={!isSignIn ? "/sign-in" : "/sign-up"}
-            className="font-bold text-user-primary ml-1"
-          >
-            {!isSignIn ? "Sign In" : "Sign Up"}
-          </Link>
-        </p>
+        {!isSignIn && (
+          <p className="text-center">
+            Already have an account?
+            <Link
+              href="/sign-in"
+              className="font-bold text-user-primary ml-1"
+            >
+              Sign In
+            </Link>
+          </p>
+        )}
       </div>
     </div>
   );

@@ -63,7 +63,7 @@ const TjenesterSection: React.FC = () => {
           fullScreen
           containerClassName="w-full"
           gridClassName=""
-          renderCardContent={(card, _index) => {
+          renderCardContent={(card) => {
             const IconComp = (card as unknown as { Icon?: LucideIcon }).Icon;
             return (
               <>

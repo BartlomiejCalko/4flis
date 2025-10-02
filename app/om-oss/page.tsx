@@ -1,16 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FlickeringGrid } from "@/components/ui/flickering-grid";
-import { ZoomParallax } from "@/components/ui/zoom-parallax";
 import { Hammer, Shield, Sparkles } from "lucide-react";
-
-const IMAGES = [
-  { src: "/bad1.jpg", alt: "Prosjekt bad 1" },
-  { src: "/bad2.jpg", alt: "Prosjekt bad 2" },
-  { src: "/bad3.jpg", alt: "Prosjekt bad 3" },
-  { src: "/bad4.jpg", alt: "Prosjekt bad 4" },
-  { src: "/bad5.jpg", alt: "Prosjekt bad 5" },
-];
 
 const Page = () => {
   return (

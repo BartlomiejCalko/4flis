@@ -21,10 +21,11 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json(result, { status: result.success ? 200 : 400 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error in add-user API:', error);
+    const message = error instanceof Error ? error.message : 'Wystąpił błąd';
     return NextResponse.json(
-      { success: false, message: error.message || 'Wystąpił błąd' },
+      { success: false, message },
       { status: 500 }
     );
   }

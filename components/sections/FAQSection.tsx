@@ -47,7 +47,7 @@ const FAQSection: React.FC = () => {
       </div>
 
       <div className="mt-10 divide-y divide-stone-200 dark:divide-stone-800 rounded-xl border border-stone-200/60 bg-white/50 p-2 backdrop-blur dark:border-stone-800/60 dark:bg-stone-900/40">
-        {FAQS.map((item, idx) => (
+        {FAQS.map((item) => (
           <details
             key={item.question}
             className="group p-4"

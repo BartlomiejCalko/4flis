@@ -1,9 +1,7 @@
 "use client";
 import React from "react";
 import { BentoCell, BentoGrid, ContainerScale, ContainerScroll } from "@/components/blocks/hero-gallery-scroll-animation";
-import Link from "next/link";
 import Image from "next/image";
-import { Bodoni_Moda } from "next/font/google";
 
 const IMAGES = [
   "/bad1.jpg",

@@ -184,8 +184,8 @@ export async function addAuthorizedUser(params: {
         password,
         displayName: name,
       });
-    } catch (authError: any) {
-      if (authError.code === "auth/email-already-exists") {
+    } catch (authError: unknown) {
+      if (authError && typeof authError === 'object' && 'code' in authError && authError.code === "auth/email-already-exists") {
         // User exists in Auth, get their UID
         userRecord = await auth.getUserByEmail(email);
       } else {
@@ -212,11 +212,12 @@ export async function addAuthorizedUser(params: {
       success: true,
       message: `Użytkownik ${email} został dodany do systemu.`,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error adding authorized user:", error);
+    const message = error instanceof Error ? error.message : 'Unknown error';
     return {
       success: false,
-      message: `Błąd: ${error.message}`,
+      message: `Błąd: ${message}`,
     };
   }
 }
@@ -247,11 +248,12 @@ export async function removeAuthorizedUser(params: {
       success: true,
       message: `Użytkownik ${email} został dezaktywowany.`,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error removing authorized user:", error);
+    const message = error instanceof Error ? error.message : 'Unknown error';
     return {
       success: false,
-      message: `Błąd: ${error.message}`,
+      message: `Błąd: ${message}`,
     };
   }
 }

@@ -8,9 +8,6 @@ import {
 	Mail,
 	MapPin,
 	Phone,
-	GithubIcon,
-	TwitterIcon,
-	LinkedinIcon,
 	InstagramIcon,
 } from 'lucide-react';
 import { Button, ButtonProps } from '@/components/ui/button';

@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react"
+import React from "react"
 import { motion } from "framer-motion"
 
 const DURATION = 0.25
@@ -6,10 +6,10 @@ const STAGGER = 0.025
 
 interface FlipLinkProps {
   children: string
-  href: string
+  href?: string
 }
 
-const FlipLink: React.FC<FlipLinkProps> = ({ children, href }) => {
+const FlipLink: React.FC<FlipLinkProps> = ({ children }) => {
   return (
     <motion.span
       initial="initial"

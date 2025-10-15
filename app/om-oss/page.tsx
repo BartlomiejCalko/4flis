@@ -70,7 +70,7 @@ const Page = () => {
           <div className="relative">
             <div className="relative h-[340px] md:h-[460px] w-full overflow-hidden rounded-2xl shadow-xl ring-1 ring-black/5 dark:ring-white/10">
               <Image
-                src="/bad3.jpg"
+                src="/hero/bad4.jpg"
                 alt="Vårt arbeid – moderne baderomsprosjekt"
                 fill
                 priority

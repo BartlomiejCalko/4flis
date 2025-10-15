@@ -2,13 +2,14 @@
 import React from "react";
 import { BentoCell, BentoGrid, ContainerScale, ContainerScroll } from "@/components/blocks/hero-gallery-scroll-animation";
 import Image from "next/image";
+import Link from "next/link";
 
 const IMAGES = [
-  "/bad1.jpg",
-  "/bad2.jpg",
-  "/bad3.jpg",
-  "/bad4.jpg",
-  "/bad5.jpg"
+  "/hero/bad5.jpg",
+  "/hero/bad2.jpg",
+  "/hero/bad3.jpg",
+  "/hero/bad4.jpg",
+  "/hero/bad6.jpg"
 ];
 
 const HomeHero: React.FC = () => {
@@ -53,17 +54,17 @@ const HomeHero: React.FC = () => {
 
         <ContainerScale className="relative z-10 text-center p-6 rounded-xl mt-6">
           
-          <div className="flex flex-col items-center mb-4">
-							<Image src="/logo_flis.png" alt="4FLIS" width={380} height={60} />
+          {/* <div className="flex flex-col items-center mb-4">
+							<Image src="/logo_flis.png" alt="4FLIS" width={80} height={60} />
 							<p className="mt-[-18px] font-{bodoni.className} text-8xl">4FLIS</p>
-          </div>
-          {/* <h1 className="max-w-xl text-1xl font-bold tracking-tighter text-slate-800 dark:text-white">
+          </div> */}
+          <h1 className="max-w-xl text-5xl font-bold tracking-tighter text-slate-800 dark:text-white">
             Flis som varer. Håndverk som skiller seg ut.
-          </h1> */}
-          {/* <p className="my-4 max-w-xl text-sm text-slate-700 dark:text-stone-300 md:text-base">
+          </h1> 
+          <p className="my-4 max-w-xl text-sm text-slate-700 dark:text-stone-300 md:text-base">
             Skreddersydd flislegging for hjem og næring – detaljene som gjør forskjellen.
-          </p> */}
-          {/* <div className="flex items-center justify-center gap-4 mt-4">
+          </p> 
+          <div className="flex items-center justify-center gap-4 mt-4">
             <Link
               href="/kontakt"
               aria-label="Kontakt oss"
@@ -78,7 +79,8 @@ const HomeHero: React.FC = () => {
             >
               Se våre prosjekter
             </Link>
-          </div> */}
+          
+          </div>
         </ContainerScale>
       </ContainerScroll>
     </>

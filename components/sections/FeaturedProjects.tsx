@@ -12,12 +12,12 @@ type Project = {
 };
 
 const PROJECTS: Project[] = [
-  { title: "Lyst bad", imageUrl: "/bad2.jpg", href: "/prosjekter" },
-  { title: "Mørke fliser", imageUrl: "/bad1.jpg", href: "/prosjekter" },
-  { title: "Moderne dusj", imageUrl: "/bad3.jpg", href: "/prosjekter" },
-  { title: "Detaljert arbeid", imageUrl: "/bad4.jpg", href: "/prosjekter" },
-  { title: "Moderne dusj", imageUrl: "/bad-dali.webp", href: "/prosjekter" },
-  { title: "Detaljert arbeid", imageUrl: "/bad-dali-2.webp", href: "/prosjekter" },
+  { title: "Lyst bad", imageUrl: "/hero/bad3.jpg", href: "/prosjekter" },
+  { title: "Mørke fliser", imageUrl: "/hero/bad7.jpg", href: "/prosjekter" },
+  { title: "Moderne dusj", imageUrl: "/hero/bad4.jpg", href: "/prosjekter" },
+  { title: "Detaljert arbeid", imageUrl: "/hero/bad8.jpg", href: "/prosjekter" },
+  { title: "Moderne dusj", imageUrl: "/hero/bad2.jpg", href: "/prosjekter" },
+  { title: "Detaljert arbeid", imageUrl: "/hero/bad6.jpg", href: "/prosjekter" },
 ];
 
 const FeaturedProjectsSection: React.FC = () => {
@@ -46,7 +46,7 @@ const FeaturedProjectsSection: React.FC = () => {
         <ZoomParallax images={parallaxImages} />
       </div>
 
-      <div className="mt-8 text-center">
+      <div className="-mt-58 text-center">
         <Link
           href="/prosjekter"
           className="inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"

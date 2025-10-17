@@ -125,14 +125,33 @@
   .auth-layout {
     @apply flex items-center justify-center mx-auto max-w-7xl min-h-screen max-sm:px-4 max-sm:py-8;
   }
+  
+  .root-layout {
+    @apply flex mx-auto max-w-7xl flex-col gap-12 my-12 px-16 max-sm:px-4 max-sm:my-8;
+  }
+
+  
+
+  .form {
+    @apply w-full; 
+  }
+
+  .card {
+    @apply dark-gradient rounded-2xl min-h-full;
+  }
 
   .card-border {
     @apply border-gradient p-0.5 rounded-2xl w-fit;
   }
+
+  
 }
 
 @utility border-gradient {
   @apply bg-gradient-to-br to-[#338de728] from-[#cf085118];
+}
+@utility dark-gradient {
+  @apply bg-gradient-to-b from-[#1A1C20] to-[#08090D];
 }
 
 /* Lenis smooth scroll helpers */

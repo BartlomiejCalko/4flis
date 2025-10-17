@@ -38,3 +38,4 @@ const AuthLayout = async ({
 } 
 
 export default AuthLayout;
+

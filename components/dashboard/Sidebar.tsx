@@ -2,8 +2,10 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Home, FolderKanban, PlusSquare, ChevronsRight, ChevronDown } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { Home, FolderKanban, PlusSquare, ChevronsRight, ChevronDown, LogOut } from "lucide-react";
+import { signOut } from "@/lib/actions/auth.action";
+import { toast } from "sonner";
 
 type SidebarProps = {
 	userName: string;
@@ -18,7 +20,19 @@ const navItems = [
 
 const Sidebar: React.FC<SidebarProps> = ({ userName, userEmail }) => {
 	const pathname = usePathname();
+	const router = useRouter();
 	const [open, setOpen] = React.useState(true);
+
+	const handleSignOut = async () => {
+		try {
+			await signOut();
+			toast.success("Wylogowano pomyślnie");
+			router.push("/sign-in");
+		} catch (error) {
+			console.error("Sign out error:", error);
+			toast.error("Błąd podczas wylogowywania");
+		}
+	};
 
 	return (
 		<nav
@@ -69,6 +83,19 @@ const Sidebar: React.FC<SidebarProps> = ({ userName, userEmail }) => {
 						</Link>
 					);
 				})}
+				
+				{/* Logout Button */}
+				<button
+					onClick={handleSignOut}
+					className="relative flex h-11 w-full items-center rounded-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-0 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-700 dark:hover:text-red-300"
+				>
+					<div className="grid h-full w-12 place-content-center">
+						<LogOut className="h-4 w-4" />
+					</div>
+					{open && (
+						<span className={`text-sm font-medium transition-opacity duration-200 ${open ? "opacity-100" : "opacity-0"}`}>Wyloguj</span>
+					)}
+				</button>
 			</div>
 
 			<button

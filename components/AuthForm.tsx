@@ -67,22 +67,17 @@ const AuthForm = ({ type }: { type: FormType }) => {
         const idToken = await userCredentials.user.getIdToken();
 
         if (!idToken) {
-          toast.error("Logowanie nie powiodło się");
+          toast.error("Sign in failed");
           return;
         }
 
-        const result = await signIn({
+        await signIn({
           email,
           idToken
         });
 
-        if (!result?.success) {
-          toast.error(result?.message || "Błąd logowania");
-          return;
-        }
-
-        toast.success("Zalogowano pomyślnie");
-        router.push("/dashboard");
+        toast.success("Signed in successfully");
+        router.push("/");
       }
     } catch (error) {
       console.log(error);
@@ -95,13 +90,13 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
   return (
     <div className="card-border lg:min-w-[566px]">
-      <div className="flex flex-col gap-6 py-14 px-10">
+      <div className="flex flex-col gap-6 card py-14 px-10">
         <div className="flex flex-row gap-2 justify-center">
           <Image src="/logo_flis.png" alt="Logo" width={38} height={32} />
-          <h2 className="text-primary-100">4-flis</h2>
+          <h2 className="text-primary-100">4Flis</h2>
         </div>
-        <h3 className="text-primary-200 text-md">
-          Zaloguj się do swojego konta
+        <h3 className="text-primary-200 text-md text-center">
+          ---------
         </h3>
 
         <Form {...form}>
@@ -137,17 +132,15 @@ const AuthForm = ({ type }: { type: FormType }) => {
             </Button>
           </form>
         </Form>
-        {!isSignIn && (
-          <p className="text-center">
-            Already have an account?
-            <Link
-              href="/sign-in"
-              className="font-bold text-user-primary ml-1"
-            >
-              Sign In
-            </Link>
-          </p>
-        )}
+        {/* <p className="text-center">
+          {isSignIn ? "Don't have an account?" : "Already have an account?"}
+          <Link
+            href={!isSignIn ? "/sign-in" : "/sign-up"}
+            className="font-bold text-user-primary ml-1"
+          >
+            {!isSignIn ? "Sign In" : "Sign Up"}
+          </Link>
+        </p> */}
       </div>
     </div>
   );

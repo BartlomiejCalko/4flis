@@ -18,23 +18,37 @@ const createAdminApp = () => {
 		ADMIN_BUCKET_NAME = envBucket || (projectId ? `${projectId}.appspot.com` : "flis-3e60f.appspot.com");
 
 		let options: AppOptions | undefined;
+		
+		// Try environment variables first
 		if (projectId && clientEmail && privateKey) {
+			console.log("✅ Firebase Admin: Using environment variables");
 			options = {
 				credential: cert({ projectId, clientEmail, privateKey: privateKey as string }),
 				storageBucket: ADMIN_BUCKET_NAME,
 			};
 		} else {
+			// Try service account JSON file
 			try {
 				const jsonPath = path.join(process.cwd(), "flis-3e60f-firebase-adminsdk-fbsvc-8193358633.json");
 				const content = readFileSync(jsonPath, "utf8");
 				const sa = JSON.parse(content);
+				console.log("✅ Firebase Admin: Using service account JSON file");
 				options = { credential: cert(sa), storageBucket: ADMIN_BUCKET_NAME } as AppOptions;
-			} catch {
+			} catch (fileError) {
+				// Fall back to application default credentials
+				console.log("⚠️ Firebase Admin: Using application default credentials (może nie działać w development)");
+				console.log("💡 Tip: Utwórz plik .env.local z konfiguracją Firebase Admin");
 				options = { credential: applicationDefault(), storageBucket: ADMIN_BUCKET_NAME } as AppOptions;
 			}
 		}
 
-		initializeApp(options);
+		try {
+			initializeApp(options);
+			console.log("✅ Firebase Admin SDK initialized successfully");
+		} catch (error) {
+			console.error("❌ Firebase Admin SDK initialization failed:", error);
+			throw error;
+		}
 	}
 };
 

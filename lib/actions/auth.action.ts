@@ -6,17 +6,6 @@ import { cookies } from "next/headers";
 // Session duration (1 week)
 const SESSION_DURATION = 60 * 60 * 24 * 7;
 
-// Check if user is authorized (whitelisted)
-async function isUserAuthorized(email: string): Promise<boolean> {
-  try {
-    const authorizedUserDoc = await db.collection("authorizedUsers").doc(email).get();
-    return authorizedUserDoc.exists && authorizedUserDoc.data()?.active === true;
-  } catch (error) {
-    console.error("Error checking authorization:", error);
-    return false;
-  }
-}
-
 // Set session cookie
 export async function setSessionCookie(idToken: string) {
   const cookieStore = await cookies();
@@ -82,35 +71,21 @@ export async function signIn(params: SignInParams) {
   const { email, idToken } = params;
 
   try {
-    // Check if user is authorized
-    const authorized = await isUserAuthorized(email);
-    if (!authorized) {
-      return {
-        success: false,
-        message: "Nie masz uprawnień do logowania. Skontaktuj się z administratorem.",
-      };
-    }
-
     const userRecord = await auth.getUserByEmail(email);
     if (!userRecord)
       return {
         success: false,
-        message: "Użytkownik nie istnieje.",
+        message: "User does not exist. Create an account.",
       };
 
     await setSessionCookie(idToken);
-
-    return {
-      success: true,
-      message: "Zalogowano pomyślnie",
-    };
 
   } catch (error) {
     console.log(error);
 
     return {
       success: false,
-      message: "Nie udało się zalogować. Spróbuj ponownie.",
+      message: "Failed to log into account. Please try again.",
     };
   }
 }
@@ -155,105 +130,4 @@ export async function getCurrentUser(): Promise<User | null> {
 export async function isAuthenticated() {
   const user = await getCurrentUser();
   return !!user;
-}
-
-// Add authorized user (admin only)
-export async function addAuthorizedUser(params: {
-  email: string;
-  password: string;
-  name: string;
-  adminKey?: string;
-}) {
-  const { email, password, name, adminKey } = params;
-
-  // Simple admin key check (you can make this more secure)
-  const expectedAdminKey = process.env.ADMIN_SECRET_KEY || "your-secret-admin-key";
-  if (adminKey !== expectedAdminKey) {
-    return {
-      success: false,
-      message: "Nieautoryzowany dostęp. Nieprawidłowy klucz administratora.",
-    };
-  }
-
-  try {
-    // Create user in Firebase Auth
-    let userRecord;
-    try {
-      userRecord = await auth.createUser({
-        email,
-        password,
-        displayName: name,
-      });
-    } catch (authError: unknown) {
-      if (authError && typeof authError === 'object' && 'code' in authError && authError.code === "auth/email-already-exists") {
-        // User exists in Auth, get their UID
-        userRecord = await auth.getUserByEmail(email);
-      } else {
-        throw authError;
-      }
-    }
-
-    // Add to authorized users collection
-    await db.collection("authorizedUsers").doc(email).set({
-      email,
-      name,
-      active: true,
-      createdAt: new Date().toISOString(),
-    });
-
-    // Add to users collection
-    await db.collection("users").doc(userRecord.uid).set({
-      name,
-      email,
-      createdAt: new Date().toISOString(),
-    });
-
-    return {
-      success: true,
-      message: `Użytkownik ${email} został dodany do systemu.`,
-    };
-  } catch (error: unknown) {
-    console.error("Error adding authorized user:", error);
-    const message = error instanceof Error ? error.message : 'Unknown error';
-    return {
-      success: false,
-      message: `Błąd: ${message}`,
-    };
-  }
-}
-
-// Remove authorized user (admin only)
-export async function removeAuthorizedUser(params: {
-  email: string;
-  adminKey?: string;
-}) {
-  const { email, adminKey } = params;
-
-  const expectedAdminKey = process.env.ADMIN_SECRET_KEY || "your-secret-admin-key";
-  if (adminKey !== expectedAdminKey) {
-    return {
-      success: false,
-      message: "Nieautoryzowany dostęp.",
-    };
-  }
-
-  try {
-    // Deactivate in authorized users
-    await db.collection("authorizedUsers").doc(email).update({
-      active: false,
-      deactivatedAt: new Date().toISOString(),
-    });
-
-    return {
-      success: true,
-      message: `Użytkownik ${email} został dezaktywowany.`,
-    };
-  } catch (error: unknown) {
-    console.error("Error removing authorized user:", error);
-    const message = error instanceof Error ? error.message : 'Unknown error';
-    return {
-      success: false,
-      message: `Błąd: ${message}`,
-    };
-  }
 }

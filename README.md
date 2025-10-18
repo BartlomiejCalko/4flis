@@ -35,11 +35,35 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-## Kontakt – konfiguracja wysyłki e-mail
+## Konfiguracja zmiennych środowiskowych
+
+### Firebase Admin SDK - Autoryzacja użytkowników
+
+Aby dodawać nowych użytkowników do systemu, musisz skonfigurować Firebase Admin SDK:
+
+1. Skopiuj plik `env.example` do `.env.local`
+2. Wygeneruj klucz Firebase Admin SDK:
+   - Wejdź na [Firebase Console](https://console.firebase.google.com/)
+   - Wybierz projekt: **flis-3e60f**
+   - Project Settings → Service Accounts → Generate New Private Key
+3. Wypełnij zmienne w `.env.local`:
+   - `ADMIN_KEY` – własny tajny klucz (minimum 20 znaków)
+   - `FIREBASE_PROJECT_ID` – ID projektu Firebase
+   - `FIREBASE_CLIENT_EMAIL` – email z pobranego JSON
+   - `FIREBASE_PRIVATE_KEY` – klucz prywatny z JSON (w cudzysłowie, z `\n`)
+
+**Sprawdź konfigurację:**
+```bash
+npx tsx scripts/check-env.ts
+```
+
+📖 **Szczegółowe instrukcje:** Zobacz `ENV_SETUP.md`
+
+### Kontakt – konfiguracja wysyłki e-mail
 
 Aby formularz kontaktowy mógł wysyłać e‑maile przez Resend:
 
-1. Skopiuj plik `.env.example` do `.env.local` i uzupełnij wartości:
+1. Dodaj do pliku `.env.local` dodatkowe wartości:
    - `RESEND_API_KEY` – klucz API z Resend
    - `MAIL_FROM` – adres nadawcy (np. `4FLIS Kontakt <onboarding@resend.dev>`) 
    - `MAIL_TO` – adres odbiorcy (np. Twój e‑mail firmowy)

@@ -14,6 +14,7 @@ import { Button, ButtonProps } from '@/components/ui/button';
 
 const APP_EMAIL = 'post@4flis.no';
 const APP_PHONE = '+47 417 41 102';
+const APP_PHONE_2 = '+47 465 89 973';
 
 
 export function ContactPage() {
@@ -64,7 +65,7 @@ export function ContactPage() {
 						description="Vi er tilgjengelig på telefon og e-post."
 					>
 						<span className="font-mono text-base font-medium tracking-wide">
-							Askimveien 10, 1337 Askim
+							Glomvikveien 79, 1815 Askim
 						</span>
 					</Box>
 					<Box
@@ -75,6 +76,7 @@ export function ContactPage() {
 					>
 						<div>
 							<div className="flex items-center gap-x-2">
+								<p className="font-mono text-base font-medium tracking-wide mr-2">Piotr:</p>
 								<a
 									href={`tel:${APP_PHONE}`}
 									className="block font-mono text-base font-medium tracking-wide hover:underline"
@@ -82,6 +84,16 @@ export function ContactPage() {
 									{APP_PHONE}
 								</a>
 								<CopyButton className="size-6" test="+47 417 41 102" />
+							</div>
+							<div className="flex items-center gap-x-2">
+							<p className="font-mono text-base font-medium tracking-wide mr-2">Anna:</p>
+								<a
+									href={`tel:${APP_PHONE_2}`}
+									className="block font-mono text-base font-medium tracking-wide hover:underline"
+								>
+									{APP_PHONE_2}
+								</a>
+								<CopyButton className="size-6" test="+47 465 89 973" />
 							</div>
 							
 						</div>

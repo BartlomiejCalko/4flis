@@ -5,11 +5,17 @@ import { list } from "@vercel/blob";
 export const dynamic = "force-dynamic";
 
 export default async function Gallery() {
-	// Fetch images from Vercel Blob storage
-	const { blobs } = await list();
+	let images: Awaited<ReturnType<typeof list>>["blobs"] = [];
+	let error: string | null = null;
 
-	// Filter for only image files (if needed)
-	const images = blobs;
+	try {
+		// Fetch images from Vercel Blob storage
+		const { blobs } = await list();
+		images = blobs;
+	} catch (err) {
+		console.error("Error fetching images from Vercel Blob:", err);
+		error = "Unable to load images. Please make sure Vercel Blob Storage is configured.";
+	}
 
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
@@ -20,11 +26,21 @@ export default async function Gallery() {
 						href="/"
 						className="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow transition-colors"
 					>
-						Upload New Image
+						Back to Home
 					</Link>
 				</div>
 
-				{images.length === 0 && (
+				{error && (
+					<div className="text-center py-12 bg-red-50 border border-red-200 rounded-xl shadow-lg">
+						<div className="text-red-600 text-xl font-semibold mb-2">⚠️ Configuration Required</div>
+						<p className="text-red-700 mb-4">{error}</p>
+						<p className="text-sm text-red-600">
+							Please set up Vercel Blob Storage in your Vercel Dashboard → Storage tab
+						</p>
+					</div>
+				)}
+
+				{!error && images.length === 0 && (
 					<div className="text-center py-12 bg-white rounded-xl shadow-lg">
 						<p className="text-xl text-gray-600">
 							No images found. Upload some images to get started!
@@ -32,8 +48,9 @@ export default async function Gallery() {
 					</div>
 				)}
 
-				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-					{images.map((image, index) => (
+				{!error && images.length > 0 && (
+					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+						{images.map((image, index) => (
 						<div
 							key={image.url}
 							className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105"
@@ -62,7 +79,8 @@ export default async function Gallery() {
 							</div>
 						</div>
 					))}
-				</div>
+					</div>
+				)}
 			</div>
 		</div>
 	);

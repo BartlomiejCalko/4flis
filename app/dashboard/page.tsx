@@ -16,7 +16,16 @@ const Page = async () => {
 	}
 
 	// Fetch all images from Vercel Blob
-	const { blobs } = await list();
+	let blobs: Awaited<ReturnType<typeof list>>["blobs"] = [];
+	let error: string | null = null;
+
+	try {
+		const result = await list();
+		blobs = result.blobs;
+	} catch (err) {
+		console.error("Error fetching images from Vercel Blob:", err);
+		error = "Unable to load images. Please make sure Vercel Blob Storage is configured.";
+	}
 
 	return (
 		<section className="container mx-auto max-w-7xl px-4 py-10">
@@ -45,8 +54,21 @@ const Page = async () => {
 				</div>
 			</div>
 
+			{/* Error State */}
+			{error && (
+				<div className="flex flex-col items-center justify-center rounded-lg border-2 border-red-300 bg-red-50 py-16 dark:border-red-700 dark:bg-red-900/20">
+					<div className="text-center">
+						<div className="text-red-600 dark:text-red-400 text-xl font-semibold mb-2">⚠️ Configuration Required</div>
+						<p className="text-red-700 dark:text-red-300 mb-4">{error}</p>
+						<p className="text-sm text-red-600 dark:text-red-400">
+							Please set up Vercel Blob Storage in your Vercel Dashboard → Storage tab
+						</p>
+					</div>
+				</div>
+			)}
+
 			{/* Images Grid */}
-			{blobs.length === 0 ? (
+			{!error && blobs.length === 0 ? (
 				<div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 py-16 dark:border-gray-700 dark:bg-gray-900">
 					<div className="text-center">
 						<ImageIcon className="mx-auto h-12 w-12 text-gray-400 mb-4" />
@@ -64,7 +86,7 @@ const Page = async () => {
 						</Link>
 					</div>
 				</div>
-			) : (
+			) : !error ? (
 				<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 					{blobs.map((blob) => (
 						<div
@@ -104,9 +126,9 @@ const Page = async () => {
 						</div>
 					))}
 				</div>
-			)}
+			) : null}
 
-			{blobs.length > 0 && (
+			{!error && blobs.length > 0 && (
 				<div className="mt-8 text-center text-sm text-gray-600 dark:text-gray-400">
 					Total images: {blobs.length}
 				</div>

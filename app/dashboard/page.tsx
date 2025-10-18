@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Plus, ImageIcon } from "lucide-react";
 import Image from "next/image";
 
+export const dynamic = "force-dynamic";
+
 const Page = async () => {
 	const user = await getCurrentUser();
 

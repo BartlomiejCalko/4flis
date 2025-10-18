@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { list } from "@vercel/blob";
 
+export const dynamic = "force-dynamic";
+
 export default async function Gallery() {
 	// Fetch images from Vercel Blob storage
 	const { blobs } = await list();

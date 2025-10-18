@@ -2,20 +2,20 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, FolderKanban, PlusSquare, ChevronsRight, ChevronDown, LogOut } from "lucide-react";
+import { Home, PlusSquare, ChevronsRight, ChevronDown, LogOut } from "lucide-react";
 import { signOut } from "@/lib/actions/auth.action";
 import { toast } from "sonner";
 
 type SidebarProps = {
 	userName: string;
-	userEmail: string;
+	userEmail?: string;
 };
 
 const navItems = [
 	{ title: "Dashboard", href: "/dashboard", icon: Home },
-	{ title: "Projects", href: "/dashboard/projects", icon: FolderKanban },
-	{ title: "Create", href: "/dashboard/projects/new", icon: PlusSquare },
+	{ title: "Upload Images", href: "/dashboard/new-image", icon: PlusSquare },
 ];
 
 const Sidebar: React.FC<SidebarProps> = ({ userName, userEmail }) => {
@@ -44,8 +44,8 @@ const Sidebar: React.FC<SidebarProps> = ({ userName, userEmail }) => {
 			<div className="mb-6 border-b border-gray-200 dark:border-gray-800 pb-4">
 				<div className="flex items-center justify-between rounded-md p-2">
 					<div className="flex items-center gap-3">
-						<div className="grid size-10 shrink-0 place-content-center rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 shadow-sm overflow-hidden" aria-hidden>
-							<img src="/logo_flis.png" alt="4FLIS" className="w-8 h-8 object-contain" />
+						<div className="relative size-10 shrink-0 rounded-lg bg-gradient-to-br from-slate-100 to-slate-200 shadow-sm overflow-hidden" aria-hidden>
+							<Image src="/logo_flis.png" alt="4FLIS" fill className="object-contain p-1" />
 						</div>
 						{open && (
 							<div className={`transition-opacity duration-200 ${open ? "opacity-100" : "opacity-0"}`}>

@@ -6,7 +6,6 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import Image from "next/image";
-import Link from "next/link";
 import { toast } from "sonner";
 import FormField from "@/components/FormField";
 import { useRouter } from "next/navigation";
@@ -40,11 +39,12 @@ const AuthForm = ({ type }: { type: FormType }) => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       if (type === 'sign-up') {
-
         const { name, email, password } = values;
 
+        // Create user in Firebase Authentication
         const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
 
+        // Save user data to Firestore
         const result = await signUp({
           uid: userCredentials.user.uid,
           name: name!,
@@ -60,7 +60,6 @@ const AuthForm = ({ type }: { type: FormType }) => {
         toast.success("Account created successfully");
         router.push("/sign-in");
       } else {
-
         const { email, password } = values;
         const userCredentials = await signInWithEmailAndPassword(auth, email, password);
 
@@ -77,13 +76,41 @@ const AuthForm = ({ type }: { type: FormType }) => {
         });
 
         toast.success("Signed in successfully");
-        router.push("/");
+        router.push("/dashboard");
       }
-    } catch (error) {
-      console.log(error);
-      toast.error(`An error occurred ${error}`);
+    } catch (error: unknown) {
+      console.error("Auth error:", error);
+      
+      // Handle Firebase Auth errors
+      if (error && typeof error === 'object' && 'code' in error) {
+        const firebaseError = error as { code: string; message: string };
+        
+        switch (firebaseError.code) {
+          case 'auth/email-already-in-use':
+            toast.error("This email is already registered. Please sign in.");
+            break;
+          case 'auth/invalid-email':
+            toast.error("Invalid email address.");
+            break;
+          case 'auth/weak-password':
+            toast.error("Password is too weak. Please use a stronger password.");
+            break;
+          case 'auth/user-not-found':
+            toast.error("No account found with this email.");
+            break;
+          case 'auth/wrong-password':
+            toast.error("Incorrect password.");
+            break;
+          case 'auth/invalid-credential':
+            toast.error("Invalid email or password.");
+            break;
+          default:
+            toast.error(`Authentication error: ${firebaseError.message}`);
+        }
+      } else {
+        toast.error("An unexpected error occurred. Please try again.");
+      }
     }
-    console.log(values);
   }
 
   const isSignIn = type === "sign-in";

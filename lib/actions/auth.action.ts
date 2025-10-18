@@ -1,6 +1,6 @@
 "use server";
 
-import { adminAuth as auth, adminDb as db } from "@/firebase/admin";
+import { auth } from "@/firebase/admin";
 import { cookies } from "next/headers";
 
 // Session duration (1 week)
@@ -29,20 +29,9 @@ export async function signUp(params: SignUpParams) {
   const { uid, name, email } = params;
 
   try {
-    // check if user exists in db
-    const userRecord = await db.collection("users").doc(uid).get();
-    if (userRecord.exists)
-      return {
-        success: false,
-        message: "User already exists. Please sign in.",
-      };
-
-    // save user to db
-    await db.collection("users").doc(uid).set({
-      name,
-      email,
-      // profileURL,
-      // resumeURL,
+    // Update user display name in Firebase Auth
+    await auth.updateUser(uid, {
+      displayName: name,
     });
 
     return {
@@ -50,19 +39,11 @@ export async function signUp(params: SignUpParams) {
       message: "Account created successfully. Please sign in.",
     };
   } catch (error: unknown) {
-    console.error("Error creating user:", error);
-
-    // Handle Firebase specific errors
-    if (error && typeof error === 'object' && 'code' in error && error.code === "auth/email-already-exists") {
-      return {
-        success: false,
-        message: "This email is already in use",
-      };
-    }
+    console.error("Error updating user in Firebase Auth:", error);
 
     return {
       success: false,
-      message: "Failed to create account. Please try again.",
+      message: "Failed to save user data. Please try again.",
     };
   }
 }
@@ -79,9 +60,8 @@ export async function signIn(params: SignInParams) {
       };
 
     await setSessionCookie(idToken);
-
-  } catch (error) {
-    console.log(error);
+  } catch (error: unknown) {
+    console.error("Error signing in:", error);
 
     return {
       success: false,
@@ -107,16 +87,15 @@ export async function getCurrentUser(): Promise<User | null> {
   try {
     const decodedClaims = await auth.verifySessionCookie(sessionCookie, true);
 
-    // get user info from db
-    const userRecord = await db
-      .collection("users")
-      .doc(decodedClaims.uid)
-      .get();
-    if (!userRecord.exists) return null;
+    // Get user info from Firebase Auth
+    const userRecord = await auth.getUser(decodedClaims.uid);
+    if (!userRecord) return null;
 
     return {
-      ...userRecord.data(),
-      id: userRecord.id,
+      id: userRecord.uid,
+      name: userRecord.displayName || userRecord.email?.split('@')[0] || 'User',
+      email: userRecord.email || '',
+      createdAt: userRecord.metadata.creationTime || new Date().toISOString(),
     } as User;
   } catch (error) {
     console.log(error);

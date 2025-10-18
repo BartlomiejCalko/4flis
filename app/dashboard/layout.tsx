@@ -9,7 +9,7 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
 
 	return (
 		<div className="min-h-screen w-full grid grid-cols-1 md:grid-cols-[auto_1fr]">
-			<Sidebar userName="Użytkownik" userEmail="email@example.com" />
+			<Sidebar userName={user.name} />
 			<main className="w-full bg-gray-50 dark:bg-gray-950 p-4 md:p-6">{children}</main>
 			<Toaster />
 		</div>

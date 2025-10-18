@@ -20,7 +20,14 @@ const Page = async () => {
 	let error: string | null = null;
 
 	try {
-		const result = await list();
+		// Get the blob token - Vercel now uses BLOB_VERCEL_READ_WRITE_TOKEN
+		const blobToken = process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_VERCEL_READ_WRITE_TOKEN;
+		
+		if (!blobToken) {
+			throw new Error("Blob token not found");
+		}
+
+		const result = await list({ token: blobToken });
 		blobs = result.blobs;
 	} catch (err) {
 		console.error("Error fetching images from Vercel Blob:", err);

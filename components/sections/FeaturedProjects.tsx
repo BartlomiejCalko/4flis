@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ZoomParallax } from "@/components/ui/zoom-parallax";
 
 
@@ -26,6 +27,8 @@ const FeaturedProjectsSection: React.FC = () => {
     []
   );
 
+  const mobileImages = PROJECTS.slice(0, 3);
+
   return (
     <section
       id="featured-projects"
@@ -41,18 +44,33 @@ const FeaturedProjectsSection: React.FC = () => {
         </p>
       </div>
 
-      {/* Zoom Parallax showcase */}
-      <div className="mt-10">
+      {/* Mobile: Simple grid with 3 images */}
+      <div className="mt-10 md:hidden grid grid-cols-1 gap-4">
+        {mobileImages.map((project, index) => (
+          <div key={index} className="relative w-full h-64 overflow-hidden rounded-xl shadow-lg">
+            <Image
+              src={project.imageUrl}
+              alt={project.title}
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop: Zoom Parallax showcase */}
+      <div className="mt-10 hidden md:block">
         <ZoomParallax images={parallaxImages} />
       </div>
 
-      <div className="-mt-58 text-center">
+      <div className="mt-10 md:-mt-58 text-center">
         <Link
           href="/prosjekter"
           className="inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
           aria-label="Se alle prosjekter"
         >
-          Se alle prosjekter
+          Se alle bilder
         </Link>
       </div>
     </section>

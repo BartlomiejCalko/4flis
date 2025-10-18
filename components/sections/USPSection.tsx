@@ -22,7 +22,7 @@ const USPSection: React.FC = () => {
     <section
       id="hvorfor-oss"
       aria-labelledby="usp-heading"
-      className="relative z-10 mx-auto w-full max-w-7xl px-4 py-24 sm:px-6 lg:px-8"
+      className="relative z-10 mx-auto w-full max-w-7xl px-4 py-16 md:py-24 sm:px-6 lg:px-8"
     >
       <div className="mx-auto max-w-2xl text-center">
         <h2 id="usp-heading" className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100">

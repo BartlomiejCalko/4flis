@@ -15,7 +15,7 @@ const FlipLink: React.FC<FlipLinkProps> = ({ children }) => {
       initial="initial"
       whileHover="hovered"
       
-      className="relative block overflow-hidden whitespace-nowrap text-4xl font-semibold uppercase dark:text-white/90 sm:text-7xl md:text-8xl "
+      className="relative block overflow-hidden whitespace-nowrap text-3xl font-semibold uppercase dark:text-white/90 sm:text-6xl md:text-7xl lg:text-8xl "
       style={{
         lineHeight: 0.75,
       }}

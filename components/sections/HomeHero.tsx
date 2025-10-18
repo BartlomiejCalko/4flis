@@ -16,7 +16,7 @@ const HomeHero: React.FC = () => {
   return (
     <>
       {/* Mobile: simple hero without scroll */}
-      <div className="md:hidden px-4 py-6 flex flex-col pt-16 pb-16">
+      <div className="md:hidden px-4 flex flex-col pt-24 pb-12">
         <h1 className="text-center text-3xl font-bold tracking-tighter text-slate-800 dark:text-white">
           Flis som varer. Håndverk som skiller seg ut.
         </h1>

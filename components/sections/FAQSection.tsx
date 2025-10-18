@@ -35,7 +35,7 @@ const FAQSection: React.FC = () => {
     <section
       id="faq"
       aria-labelledby="faq-heading"
-      className="relative z-10 mx-auto w-full max-w-4xl px-4 py-24 sm:px-6 lg:px-8"
+      className="relative z-10 mx-auto w-full max-w-4xl px-4 py-16 md:py-24 sm:px-6 lg:px-8"
     >
       <div className="text-center">
         <h2 id="faq-heading" className="text-3xl font-bold tracking-tight text-stone-900 dark:text-stone-100">

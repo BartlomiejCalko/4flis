@@ -8,7 +8,7 @@ const CTASection: React.FC = () => {
     <section
       id="kontakt-cta"
       aria-labelledby="cta-heading"
-      className="relative z-10 mx-auto w-full max-w-7xl px-4 py-24 sm:px-6 lg:px-8"
+      className="relative z-10 mx-auto w-full max-w-7xl px-4 py-16 md:py-24 sm:px-6 lg:px-8"
     >
       <div className="overflow-hidden rounded-2xl border border-indigo-200/50 bg-gradient-to-br from-indigo-600 to-violet-600 p-8 shadow-lg dark:border-indigo-500/20">
         <div className="mx-auto flex max-w-3xl flex-col items-center text-center">

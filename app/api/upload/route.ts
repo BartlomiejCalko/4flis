@@ -13,11 +13,13 @@ export async function POST(request: Request): Promise<NextResponse> {
     );
   }
 
-  // Check if BLOB_READ_WRITE_TOKEN is available
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
-    console.error('BLOB_READ_WRITE_TOKEN is not set');
+  // Get the blob token - Vercel now uses BLOB_VERCEL_READ_WRITE_TOKEN
+  const blobToken = process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_VERCEL_READ_WRITE_TOKEN;
+  
+  if (!blobToken) {
+    console.error('Blob token is not available');
     return NextResponse.json(
-      { error: 'Vercel Blob Storage is not configured. Please add BLOB_READ_WRITE_TOKEN environment variable.' },
+      { error: 'Vercel Blob Storage is not configured. Please check your environment variables.' },
       { status: 500 }
     );
   }
@@ -28,6 +30,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     const jsonResponse = await handleUpload({
       body,
       request,
+      token: blobToken,
       onBeforeGenerateToken: async () => {
         return {
           allowedContentTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'],

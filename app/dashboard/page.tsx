@@ -4,7 +4,7 @@ import { list } from "@vercel/blob";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Plus, ImageIcon } from "lucide-react";
-import Image from "next/image";
+import { ImageGrid } from "@/components/dashboard/ImageGrid";
 
 export const dynamic = "force-dynamic";
 
@@ -52,7 +52,7 @@ const Page = async () => {
 							Upload Images
 						</Button>
 					</Link>
-					<Link href="/gallery">
+					<Link href="/prosjekter">
 						<Button variant="outline">
 							<ImageIcon className="mr-2 h-4 w-4" />
 							View Gallery
@@ -94,52 +94,8 @@ const Page = async () => {
 					</div>
 				</div>
 			) : !error ? (
-				<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-					{blobs.map((blob) => (
-						<div
-							key={blob.url}
-							className="group overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md dark:border-gray-800 dark:bg-gray-950"
-						>
-							{/* Image Preview */}
-							<div className="relative aspect-square overflow-hidden bg-gray-100 dark:bg-gray-800">
-								<Image
-									src={blob.url}
-									alt={blob.pathname.split("/").pop() || "Image"}
-									fill
-									sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-									className="object-cover transition-transform group-hover:scale-105"
-								/>
-							</div>
-
-							{/* Image Info */}
-							<div className="p-4">
-								<p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
-									{blob.pathname.split("/").pop() || "Image"}
-								</p>
-								<div className="mt-2 flex items-center justify-between">
-									<span className="text-xs text-gray-500 dark:text-gray-500">
-										{new Date(blob.uploadedAt).toLocaleDateString("pl-PL")}
-									</span>
-									<a
-										href={blob.url}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="text-xs text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-									>
-										View
-									</a>
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
+				<ImageGrid initialBlobs={blobs} />
 			) : null}
-
-			{!error && blobs.length > 0 && (
-				<div className="mt-8 text-center text-sm text-gray-600 dark:text-gray-400">
-					Total images: {blobs.length}
-				</div>
-			)}
 		</section>
 	);
 };

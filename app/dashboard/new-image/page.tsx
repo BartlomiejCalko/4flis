@@ -81,7 +81,18 @@ const AddImage = () => {
 			}, 1500);
 		} catch (error) {
 			console.error("Upload error:", error);
-			toast.error("Failed to upload images. Please try again.");
+			
+			// Show specific error message
+			let errorMessage = "Failed to upload images. Please try again.";
+			if (error instanceof Error) {
+				if (error.message.includes("token")) {
+					errorMessage = "Vercel Blob Storage configuration error. Please contact administrator.";
+				} else {
+					errorMessage = error.message;
+				}
+			}
+			
+			toast.error(errorMessage);
 		} finally {
 			setUploading(false);
 		}

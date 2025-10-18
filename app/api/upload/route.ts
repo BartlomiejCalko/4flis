@@ -13,6 +13,15 @@ export async function POST(request: Request): Promise<NextResponse> {
     );
   }
 
+  // Check if BLOB_READ_WRITE_TOKEN is available
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    console.error('BLOB_READ_WRITE_TOKEN is not set');
+    return NextResponse.json(
+      { error: 'Vercel Blob Storage is not configured. Please add BLOB_READ_WRITE_TOKEN environment variable.' },
+      { status: 500 }
+    );
+  }
+
   const body = (await request.json()) as HandleUploadBody;
 
   try {
@@ -49,8 +58,9 @@ export async function POST(request: Request): Promise<NextResponse> {
     return NextResponse.json(jsonResponse);
   } catch (error) {
     console.error('Upload error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     return NextResponse.json(
-      { error: (error as Error).message },
+      { error: errorMessage },
       { status: 400 },
     );
   }

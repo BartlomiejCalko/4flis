@@ -110,3 +110,85 @@ export async function isAuthenticated() {
   const user = await getCurrentUser();
   return !!user;
 }
+
+// Add authorized user (admin function)
+export async function addAuthorizedUser(params: {
+  name: string;
+  email: string;
+  password: string;
+  adminKey: string;
+}) {
+  const { name, email, password, adminKey } = params;
+
+  try {
+    // Verify admin key
+    const ADMIN_KEY = process.env.ADMIN_KEY;
+    if (!ADMIN_KEY) {
+      return {
+        success: false,
+        message: "Admin key not configured on server",
+      };
+    }
+
+    if (adminKey !== ADMIN_KEY) {
+      return {
+        success: false,
+        message: "Invalid admin key",
+      };
+    }
+
+    // Validate password length
+    if (password.length < 6) {
+      return {
+        success: false,
+        message: "Password must be at least 6 characters",
+      };
+    }
+
+    // Check if user already exists
+    try {
+      const existingUser = await auth.getUserByEmail(email);
+      if (existingUser) {
+        return {
+          success: false,
+          message: "User with this email already exists",
+        };
+      }
+    } catch (error: any) {
+      // User doesn't exist, which is what we want
+      if (error.code !== "auth/user-not-found") {
+        throw error;
+      }
+    }
+
+    // Create user in Firebase Auth
+    const userRecord = await auth.createUser({
+      email,
+      password,
+      displayName: name,
+      emailVerified: true, // Auto-verify for admin-created users
+    });
+
+    return {
+      success: true,
+      message: `User ${email} created successfully with ID: ${userRecord.uid}`,
+    };
+  } catch (error: any) {
+    console.error("Error adding authorized user:", error);
+
+    let errorMessage = "Failed to create user. Please try again.";
+    
+    if (error.code === "auth/email-already-exists") {
+      errorMessage = "User with this email already exists";
+    } else if (error.code === "auth/invalid-email") {
+      errorMessage = "Invalid email address";
+    } else if (error.code === "auth/weak-password") {
+      errorMessage = "Password is too weak";
+    }
+
+    return {
+      success: false,
+      message: errorMessage,
+    };
+  }
+}

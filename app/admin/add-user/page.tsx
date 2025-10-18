@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
+import Link from 'next/link';
 
 const AddUserPage = () => {
   const [formData, setFormData] = useState({
@@ -60,11 +61,11 @@ const AddUserPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold">
-            Dodaj Autoryzowanego Użytkownika
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100">
+            Dodaj Użytkownika
           </h2>
-          <p className="mt-2 text-center text-sm text-muted-foreground">
-            Tylko dla administratorów
+          <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+            Panel administracyjny - dodaj nowego użytkownika do dashboardu
           </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -118,11 +119,11 @@ const AddUserPage = () => {
                 required
                 value={formData.adminKey}
                 onChange={handleChange}
-                placeholder="Tajny klucz"
+                placeholder="Tajny klucz administratora"
                 className="mt-1"
               />
-              <p className="text-xs text-muted-foreground mt-1">
-                Skontaktuj się z głównym administratorem w celu uzyskania klucza
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                Wymagany klucz administratora ustawiony w zmiennych środowiskowych
               </p>
             </div>
           </div>
@@ -139,9 +140,9 @@ const AddUserPage = () => {
         </form>
 
         <div className="text-center">
-          <a href="/sign-in" className="text-sm text-primary hover:underline">
+          <Link href="/sign-in" className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
             Powrót do logowania
-          </a>
+          </Link>
         </div>
       </div>
     </div>

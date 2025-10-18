@@ -66,18 +66,16 @@ const TjenesterSection: React.FC = () => {
           renderCardContent={(card) => {
             const IconComp = (card as unknown as { Icon?: LucideIcon }).Icon;
             return (
-              <>
-                <div className="flex items-start gap-4 text-white">
-                  <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-indigo-50/10 text-indigo-300 ring-1 ring-inset ring-indigo-400/20">
-                    {IconComp ? <IconComp aria-hidden className="h-6 w-6" /> : null}
-                    <span className="sr-only">{card.title}</span>
-                  </span>
-                  <div>
-                    <h3 className="text-lg font-semibold text-white">{card.title}</h3>
-                    <p className="mt-1 text-sm text-white/80">{card.description}</p>
-                  </div>
+              <div className="flex items-start gap-4 text-white">
+                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-indigo-50/10 text-indigo-300 ring-1 ring-inset ring-indigo-400/20">
+                  {IconComp ? <IconComp aria-hidden className="h-6 w-6" /> : null}
+                  <span className="sr-only">{card.title}</span>
+                </span>
+                <div>
+                  <h3 className="text-lg font-semibold text-white">{card.title}</h3>
+                  <p className="mt-1 text-sm text-white/90">{card.description}</p>
                 </div>
-              </>
+              </div>
             );
           }}
         />

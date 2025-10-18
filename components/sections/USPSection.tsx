@@ -37,7 +37,7 @@ const USPSection: React.FC = () => {
         {USPS.map((item) => (
           <div
             key={item.title}
-            className="group relative rounded-xl border border-stone-200/60 bg-white/50 p-6 shadow-sm backdrop-blur dark:border-stone-800/60 dark:bg-stone-900/40 transition-colors"
+            className="group relative rounded-xl border border-stone-200/60 bg-white/50 p-6 shadow-sm backdrop-blur dark:border-stone-800/60 dark:bg-stone-900/20 transition-colors"
             role="article"
             aria-label={item.title}
             tabIndex={0}

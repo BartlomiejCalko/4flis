@@ -2,12 +2,14 @@
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
+import Image from 'next/image';
 
 export interface BentoCardProps {
   color?: string;
   title?: string;
   description?: string;
   label?: string;
+  imageUrl?: string;
   textAutoHide?: boolean;
   disableAnimations?: boolean;
 }
@@ -694,9 +696,9 @@ const MagicBento: React.FC<BentoProps> = ({
       <BentoCardGrid gridRef={gridRef} className={`${fullScreen ? 'w-screen' : 'w-full'} ${containerClassName ?? ''}`}>
         <div className={`card-responsive grid gap-2 max-w-full w-full ${gridClassName ?? ''}`}>
           {data.map((card, index) => {
-            const baseClassName = `justify-center card flex flex-col justify-between relative aspect-[4/3] min-h-[200px] w-full max-w-full p-5 rounded-[20px] border border-solid font-light overflow-hidden bg-gradient-to-br from-purple-400/50 to-blue-500/20 dark:from-purple-500/5 dark:to-blue-500/4 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] ${
+            const baseClassName = `justify-center card flex flex-col justify-between relative aspect-[4/3] min-h-[200px] w-full max-w-full p-5 rounded-[20px] border border-solid font-light overflow-hidden bg-gradient-to-br from-slate-900/95 via-indigo-950/95 to-slate-900/95 dark:from-purple-500/5 dark:to-blue-500/4 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] ${
               enableBorderGlow ? 'card--border-glow' : ''
-            } text-stone-900 dark:text-stone-100`;
+            } text-white dark:text-stone-100`;
 
             const cardStyle = {
               borderColor: 'var(--border-color)',
@@ -708,18 +710,29 @@ const MagicBento: React.FC<BentoProps> = ({
 
             const defaultContent = (
               <>
-                <div className="card__header flex justify-between gap-3 relative">
+                <div className="card__header flex justify-between gap-3 relative z-10">
                   <span className="card__label text-base">{card.label}</span>
                 </div>
-                <div className="card__content flex flex-col relative">
+                <div className="card__content flex flex-col relative z-10 flex-grow">
                   <h3 className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}>
                     {card.title}
                   </h3>
                   <p
-                    className={`card__description text-xs leading-5 opacity-90 ${textAutoHide ? 'text-clamp-2' : ''}`}
+                    className={`card__description text-xs leading-5 opacity-90 ${textAutoHide ? 'text-clamp-2' : ''} mb-3`}
                   >
                     {card.description}
                   </p>
+                  {card.imageUrl && (
+                    <div className="card__image relative w-full h-32 mt-auto rounded-lg overflow-hidden">
+                      <Image 
+                        src={card.imageUrl} 
+                        alt={card.title || ''} 
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    </div>
+                  )}
                 </div>
               </>
             );

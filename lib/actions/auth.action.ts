@@ -26,7 +26,7 @@ export async function setSessionCookie(idToken: string) {
 }
 
 export async function signUp(params: SignUpParams) {
-  const { uid, name, email } = params;
+  const { uid, name } = params;
 
   try {
     // Update user display name in Firebase Auth
@@ -154,9 +154,10 @@ export async function addAuthorizedUser(params: {
           message: "User with this email already exists",
         };
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       // User doesn't exist, which is what we want
-      if (error.code !== "auth/user-not-found") {
+      const firebaseError = error as { code?: string };
+      if (firebaseError.code !== "auth/user-not-found") {
         throw error;
       }
     }
@@ -173,16 +174,17 @@ export async function addAuthorizedUser(params: {
       success: true,
       message: `User ${email} created successfully with ID: ${userRecord.uid}`,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error adding authorized user:", error);
 
     let errorMessage = "Failed to create user. Please try again.";
     
-    if (error.code === "auth/email-already-exists") {
+    const firebaseError = error as { code?: string };
+    if (firebaseError.code === "auth/email-already-exists") {
       errorMessage = "User with this email already exists";
-    } else if (error.code === "auth/invalid-email") {
+    } else if (firebaseError.code === "auth/invalid-email") {
       errorMessage = "Invalid email address";
-    } else if (error.code === "auth/weak-password") {
+    } else if (firebaseError.code === "auth/weak-password") {
       errorMessage = "Password is too weak";
     }
 
